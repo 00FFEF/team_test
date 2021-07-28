@@ -17,7 +17,7 @@ def service_index(request):
     return render(request,'service_index.html')
 
 def kakao_chart(request):
-    data = MyAnalysis().kakaoo()
+    data = MyAnalysis().kakao()
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 def naver_chart(request):
