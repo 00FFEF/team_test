@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <title>Phoenix Scrapping</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="http://code.jquery.com/jquery-1.7.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/series-label.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <script>
+      function display1(data){
+          Highcharts.chart('kakao', {
+            title: {
+                text: '카카오 쇼핑몰 탑10의 순위 그래프'
+            },
+            subtitle: {
+                text: 'Source: https://store.kakao.com/home/best'
+            },
+            chart: {
+
+            },
+            yAxis: {
+                min:1, max:10,
+                tickInterval: 1,
+                title: {
+                    text: '순위'
+                },
+                reversed: true,
+            },
+            xAxis: {
+                accessibility: {
+                    rangeDescription: ''
+                },
+                categories: ['2021-07-20', '2021-07-22', '2021-07-23', '2021-07-26', '2021-07-27','2021-07-28']
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+            plotOptions: {
+                series: {
+                    label: {
+                        connectorAllowed: false
+                    },
+                    pointStart: 0
+                }
+            },
+            series: data,
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+        });
+      };
+
+      function display2(data){
+          Highcharts.chart('naver', {
+            title: {
+                text: '네이버 쇼핑몰 탑10의 순위 그래프'
+            },
+            subtitle: {
+                text: 'Source: https://search.shopping.naver.com/'
+            },
+            chart: {
+
+            },
+            yAxis: {
+                min:1, max:10,
+                tickInterval: 1,
+                title: {
+                    text: '순위'
+                },
+                reversed: true,
+            },
+            xAxis: {
+                accessibility: {
+                    rangeDescription: ''
+                },
+                categories: ['2021-07-20', '2021-07-22', '2021-07-23', '2021-07-26', '2021-07-27','2021-07-28']
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+            plotOptions: {
+                series: {
+                    label: {
+                        connectorAllowed: false
+                    },
+                    pointStart: 0
+                }
+            },
+            series: data,
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+        });
+      };
+
+  $(document).ready(function(){
+    $.ajax({
+      url:'kakao',
+      datatype:'json',
+      success:function(data){
+          display1(data);
+          $.ajax({
+            url:'naver',
+            datatype:'json',
+            success:function(data){
+              display2(data);
+            }
+          });
+      }
+    });
+  });
+
+    </script>
+  <style>
+  body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+  .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+  .fa-anchor,.fa-coffee {font-size:200px}
+  </style>
+  <body>
+
+  <!-- Navbar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+      <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+      <a href="/main" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Home</a>
+      <a href="/scrapping_index" class="w3-bar-item w3-button w3-padding-large w3-white">스크래핑 통계</a>
+      <a href="/machine_index" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">머신러닝 통계</a>
+      <a href="/service_index" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">기타</a>
+    </div>
+
+    <!-- Navbar on small screens -->
+    <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+      <a href="/scrapping_index" class="w3-bar-item w3-button w3-padding-large">스크래핑 통계</a>
+      <a href="/machine_index" class="w3-bar-item w3-button w3-padding-large">머신러닝 통계</a>
+      <a href="/service_index" class="w3-bar-item w3-button w3-padding-large">기타</a>
+    </div>
+  </div>
+
+    <!-- Header -->
+  <header class="w3-container w3-red w3-center" style="padding:128px 16px">
+    <h1 class="w3-margin w3-jumbo">Scrapping Page</h1>
+  </header>
+
+  <!-- First Grid -->
+  <div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-content">
+      <div class="w3-twothird">
+        <h1>네이버 쇼핑몰 차트</h1>
+      </div>
+    </div>
+  </div>
+  <div id="naver"></div>
+
+  <!-- Second Grid -->
+  <div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-content">
+      <div class="w3-twothird">
+        <h1>카카오 쇼핑몰 차트</h1>
+      </div>
+    </div>
+  </div>
+  <div id="kakao"></div>
+
+  </body>
+</html>
